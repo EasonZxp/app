@@ -1,0 +1,11 @@
+<resources>
+    <string name="select_apk_to_begin">Select an APK to begin</string>
+    <string name="or_drag_and_drop_it">(or drag and drop it)</string>
+    <string name="decoding_apk">Processing APK…</string>
+    <string name="unknown_package">&lt;unknown package&gt;</string>
+    <string name="cant_read_apk">Selected APK file cannot be parsed.</string>
+    <string name="apk_file_exported">APK file has been successfully exported.</string>
+    <string name="cant_update_overport">overport libraries cannot be downloaded.</string>
+    <string name="unknown_error">Unknown error has been occurred.</string>
+    <string name="update_available">Update available!</string>
+</resources>
