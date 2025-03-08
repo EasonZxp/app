@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CloudDownload
-import androidx.compose.material.icons.filled.Download
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -79,7 +78,6 @@ fun AppContent(
                                 Constants.OVRPORT_VERSION,
                                 modifier = Modifier.padding(8.dp),
                                 fontSize = 18.sp,
-                                color = MaterialTheme.colorScheme.secondary
                             )
                         }
                     },
@@ -103,7 +101,6 @@ fun AppContent(
                                 Text(
                                     stringResource(Res.string.update_available),
                                     fontSize = 18.sp,
-                                    color = MaterialTheme.colorScheme.secondary,
                                     modifier = Modifier.padding(0.dp, 8.dp, 8.dp, 8.dp),
                                 )
                             }

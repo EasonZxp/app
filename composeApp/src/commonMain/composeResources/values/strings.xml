@@ -8,4 +8,9 @@
     <string name="cant_update_overport">overport libraries cannot be downloaded.</string>
     <string name="unknown_error">Unknown error has been occurred.</string>
     <string name="update_available">Update available!</string>
+    <string name="status_unknown">Unknown</string>
+    <string name="status_playable">Playable</string>
+    <string name="status_has_problems">Has problems</string>
+    <string name="status_not_working">Not working</string>
+    <string name="status_loading">Loading…</string>
 </resources>
