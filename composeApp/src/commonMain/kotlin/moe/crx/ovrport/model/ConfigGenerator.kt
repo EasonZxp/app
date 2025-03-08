@@ -7,25 +7,25 @@ import kotlinx.serialization.json.Json
 @Serializable
 data class FrdaAsset(
     @SerialName("ID")
-    val id: Long,
-    val path: String,
+    val id: Long = 0,
+    val path: String = "",
     val type: String = "store"
 )
 
 @Serializable
 data class FrdaParameters(
-    val assets: List<FrdaAsset>,
-    val skus: List<String>
+    val assets: List<FrdaAsset> = listOf(),
+    val skus: List<String> = listOf()
 )
 
 @Serializable
 data class FrdaInteraction(
-    val parameters: FrdaParameters
+    val parameters: FrdaParameters = FrdaParameters(),
 )
 
 @Serializable
 data class FrdaConfig(
-    val interaction: FrdaInteraction
+    val interaction: FrdaInteraction = FrdaInteraction(),
 )
 
 private val json = Json { ignoreUnknownKeys = true }
