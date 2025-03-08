@@ -184,15 +184,22 @@ object PatchStore {
                     takeNodesEach({ named("application") }) {
                         takeNodesEach({ named("activity") }) {
                             takeNodesEach({ named("intent-filter") }) {
-                                takeNodesEach({ named("category") }) {
-                                    when (attributeName()) {
-                                        "android.intent.category.INFO" -> null
-                                        "android.intent.category.LAUNCHER" -> null
-                                        else -> this
+                                val hasIntent = elem<JSONArray>("nodes").elemEach<JSONObject> { named("category") }.map {
+                                    when (it.attributeName()) {
+                                        "com.oculus.intent.category.VR" -> true
+                                        "android.intent.category.LAUNCHER" -> true
+                                        else -> false
                                     }
-                                }
+                                }.reduceOrNull { l, r -> l || r } ?: false
+
                                 takeNodes {
-                                    this?.put(createCategory("android.intent.category.LAUNCHER"))
+                                    if (!hasIntent) this else {
+                                        JSONArray()
+                                            .put(createAction("android.intent.action.MAIN"))
+                                            .put(createCategory("android.intent.category.LAUNCHER"))
+                                            .put(createCategory("com.oculus.intent.category.VR"))
+                                            .put(createCategory("com.yvr.intent.category.VR"))
+                                    }
                                 }
                             }
                         }

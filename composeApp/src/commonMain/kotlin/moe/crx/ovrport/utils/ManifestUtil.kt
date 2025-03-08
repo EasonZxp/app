@@ -86,3 +86,22 @@ fun createCategory(value: String): JSONObject {
                 )
         )
 }
+
+fun createAction(value: String): JSONObject {
+    return JSONObject()
+        .put("node_type", "element")
+        .put("name", "action")
+        .put(
+            "attributes",
+            JSONArray()
+                .put(
+                    JSONObject()
+                        .put("name", "name")
+                        .put("id", 16842755)
+                        .put("uri", "http://schemas.android.com/apk/res/android")
+                        .put("prefix", "android")
+                        .put("value_type", "STRING")
+                        .put("data", value)
+                )
+        )
+}
