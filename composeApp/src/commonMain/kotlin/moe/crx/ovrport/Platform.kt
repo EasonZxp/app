@@ -11,4 +11,4 @@ class AndroidPlatform(override val name: String) : Platform
 expect fun getPlatform(): Platform
 
 // TODO This should be controlled by Gradle.
-fun getCurrentVersion(): String = "1.0.0"
+fun getCurrentVersion(): String = "1.1.0"
