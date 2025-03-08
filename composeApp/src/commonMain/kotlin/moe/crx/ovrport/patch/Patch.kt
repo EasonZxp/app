@@ -14,8 +14,8 @@ class FileTransformer(val file: File) {
         file.writeText(Regex(input, RegexOption.DOT_MATCHES_ALL).replace(file.readText(), output))
     }
 
-    fun find(input: String): Boolean {
-        return Regex(input, RegexOption.DOT_MATCHES_ALL).find(file.readText()) != null
+    fun readText(): String {
+        return file.readText()
     }
 
     fun append(line: String) {
@@ -158,7 +158,10 @@ class PatchExecutor(private val workingDir: File) {
                 it ?: workingDir.resolve("smali/classes").apply { mkdirs() }
             }
             .resolve("${fileName}.smali")
-            .apply { createNewFile() }
+            .apply {
+                parentFile?.mkdirs()
+                createNewFile()
+            }
             .run {
                 if (exists()) {
                     FileTransformer(this).block()

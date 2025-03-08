@@ -216,7 +216,7 @@ object PatchStore {
         }
         PATCHES += Patch("Fix Unreal Engine 4 crash") {
             createSmali("com/unity3d/player/UnityPlayer") {
-                if (!find(".*")) {
+                if (readText().isBlank()) {
                     append(".class public Lcom/unity3d/player/UnityPlayer;")
                     append(".super Ljava/lang/Object;")
                     append(".field public static currentActivity:Landroid/app/Activity;")
