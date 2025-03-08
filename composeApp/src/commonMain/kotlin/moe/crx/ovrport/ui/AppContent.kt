@@ -1,8 +1,5 @@
 package moe.crx.ovrport.ui
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,16 +18,14 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import moe.crx.ovrport.AndroidPlatform
 import moe.crx.ovrport.getCurrentVersion
-import moe.crx.ovrport.patch.Patch
 import moe.crx.ovrport.getPlatform
 import moe.crx.ovrport.model.GithubRelease
 import moe.crx.ovrport.patch.Constants
+import moe.crx.ovrport.patch.Patch
 import moe.crx.ovrport.ui.theme.OverportTheme
-import moe.crx.ovrport.utils.HttpUtil
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import overportapp.composeapp.generated.resources.Res
@@ -82,11 +77,7 @@ fun AppContent(
                         }
                     },
                     actions = {
-                        AnimatedVisibility(
-                            versionToUpdate?.name != null && versionToUpdate?.name != getCurrentVersion(),
-                            enter = fadeIn(),
-                            exit = fadeOut()
-                        ) {
+                        FadeVisibility(versionToUpdate?.name != null && versionToUpdate?.name != getCurrentVersion()) {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clip(
                                     RoundedCornerShape(16.dp)
@@ -115,21 +106,13 @@ fun AppContent(
             val inProgress = viewModel.working
             val isPatcherVisible = viewModel.isApkLoaded() && !inProgress
 
-            AnimatedVisibility(
-                !isPatcherVisible,
-                enter = fadeIn(),
-                exit = fadeOut()
-            ) {
+            FadeVisibility(!isPatcherVisible) {
                 StartingCard(innerPadding, inProgress) {
                     onOpen()
                 }
             }
 
-            AnimatedVisibility(
-                isPatcherVisible,
-                enter = fadeIn(),
-                exit = fadeOut()
-            ) {
+            FadeVisibility(isPatcherVisible) {
                 ApplicationInfoCard(
                     innerPadding,
                     viewModel.currentAppName(),

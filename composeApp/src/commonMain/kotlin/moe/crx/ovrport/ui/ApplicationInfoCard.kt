@@ -1,103 +1,22 @@
 package moe.crx.ovrport.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Widgets
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import moe.crx.ovrport.patch.Constants.LOADING_COMPATIBILITY
 import moe.crx.ovrport.patch.Patch
 import moe.crx.ovrport.patch.PatchStore
-import moe.crx.ovrport.patch.getCompatibilityStatus
-import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import overportapp.composeapp.generated.resources.Res
-import overportapp.composeapp.generated.resources.unknown_package
-
-@Composable
-fun ApplicationInfo(
-    applicationName: String? = "Application",
-    applicationPackage: String? = "com.company.application",
-    applicationVersion: String? = "1.0.0",
-    applicationIcon: ImageBitmap? = null,
-) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        if (applicationIcon == null) {
-            Icon(
-                Icons.Default.Widgets,
-                contentDescription = null,
-                modifier = Modifier.size(48.dp)
-            )
-        } else {
-            Image(
-                applicationIcon,
-                contentDescription = null,
-                modifier = Modifier.size(48.dp).clip(RoundedCornerShape(8.dp))
-            )
-        }
-        Column(
-            modifier = Modifier.height(48.dp),
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text("$applicationName ($applicationVersion)")
-            Text(
-                applicationPackage ?: stringResource(Res.string.unknown_package),
-            )
-        }
-    }
-}
-
-@Composable
-fun ApplicationStatus(
-    applicationName: String? = "Application",
-    applicationPackage: String? = "",
-) {
-    var statusInfo by remember(applicationPackage) { mutableStateOf(LOADING_COMPATIBILITY) }
-    val urlHandler = LocalUriHandler.current
-
-    LaunchedEffect(applicationPackage) {
-        withContext(Dispatchers.IO) {
-            statusInfo = getCompatibilityStatus(applicationName, applicationPackage)
-        }
-    }
-
-
-        Card(colors = CardDefaults.cardColors(statusInfo.status.cardColor, statusInfo.status.contentColor)) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clip(
-                    RoundedCornerShape(16.dp)
-                ).clickable {
-                    urlHandler.openUri(statusInfo.url)
-                }) {
-                Icon(
-                    statusInfo.status.icon,
-                    contentDescription = null,
-                    modifier = Modifier.padding(16.dp),
-                )
-                Text(
-                    stringResource(statusInfo.status.nameResource),
-                    fontSize = 18.sp,
-                    modifier = Modifier.padding(0.dp, 16.dp, 16.dp, 16.dp),
-                )
-            }
-        }
-}
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
