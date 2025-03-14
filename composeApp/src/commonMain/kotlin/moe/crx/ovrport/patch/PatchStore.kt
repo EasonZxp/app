@@ -237,7 +237,7 @@ object PatchStore {
             }
         }
         PATCHES += Patch("Patch MetaXRAudioWwise") {
-            selectLibrary("liblibMetaXRAudioWwise.so") {
+            selectLibrary("libMetaXRAudioWwise.so") {
                 replaceHex(
                     "57 D0 3B D5 40 EB FF F0 00 0C 2D 91 E8 16 40 F9 A8 83 1F F8 DC 7F 0B 94 00 01 00 B4 E3 03 00 AA 21 EB FF B0",
                     "57 D0 3B D5 20 00 80 D2 1F 20 03 D5 E8 16 40 F9 A8 83 1F F8 1F 20 03 D5 00 01 00 B4 03 00 80 D2 21 EB FF B0"

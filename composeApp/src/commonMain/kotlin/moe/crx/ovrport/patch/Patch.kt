@@ -38,7 +38,12 @@ class FileTransformer(val file: File) {
             var matches = true
 
             for (j in i..<bytes.size) {
-                if (inputBytes[j] != "??" && bytes[j] != inputBytes[j].toByte(16)) {
+                val checkIndex = j - i
+                if (checkIndex >= inputBytes.size) {
+                    break
+                }
+
+                if (inputBytes[checkIndex] != "??" && bytes[j].toUByte() != inputBytes[checkIndex].toUByte(16)) {
                     matches = false
                     break
                 }
@@ -46,7 +51,7 @@ class FileTransformer(val file: File) {
 
             if (matches) {
                 val replaced = bytes.slice(0..<i) +
-                        output.split(' ').map { it.toByte(16) } +
+                        output.split(' ').map { it.toUByte(16).toByte() } +
                         bytes.slice(i+inputBytes.size..<bytes.size)
                 file.writeBytes(replaced.toByteArray())
                 return
