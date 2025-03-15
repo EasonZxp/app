@@ -139,6 +139,7 @@ fun PatcherContext.patch(patches: List<Patch>) {
         .parentFile
         ?.resolve(outputApk.name + ".temp")
         ?.let {
+            it.delete()
             outputApk.copyTo(it)
         }
 
